@@ -1,0 +1,18 @@
+{
+    "require": {
+        "php": ">=5.5.0",
+        "pimple/pimple":"~3.0",
+        "predis/predis":"1.1.1",
+        "silex/silex":"~2.0",
+        "monolog/monolog": "^1.17",
+        "symfony/validator":"@dev",
+        "ramsey/uuid":"*",
+        "vlucas/valitron":"*",
+        "robmorgan/phinx":"@dev",
+        "league/climate":"*",
+        "pyrocms/lex": "2.2.*"
+    },
+    "require-dev": {
+        "codegyre/robo": "*"
+    }
+}
