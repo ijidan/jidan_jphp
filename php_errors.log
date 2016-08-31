@@ -1,9 +1,0 @@
-[28-Jul-2016 22:50:54 PRC] PHP Fatal error:  Class 'Lex\Parser' not found in E:\fr\wb\Protected\Controller\SiteController.php on line 31
-[28-Jul-2016 23:23:29 PRC] PHP Fatal error:  Access type for interface method Jphp\Template\TemplateInterface::parseVariable() must be omitted in E:\fr\wb\Protected\Jphp\Template\TemplateInterface.php on line 13
-[28-Jul-2016 23:24:12 PRC] PHP Fatal error:  Access type for interface method Jphp\Template\TemplateInterface::parseVariable() must be omitted in E:\fr\wb\Protected\Jphp\Template\TemplateInterface.php on line 13
-[28-Jul-2016 23:24:13 PRC] PHP Fatal error:  Access type for interface method Jphp\Template\TemplateInterface::parseVariable() must be omitted in E:\fr\wb\Protected\Jphp\Template\TemplateInterface.php on line 13
-[28-Jul-2016 23:24:13 PRC] PHP Fatal error:  Access type for interface method Jphp\Template\TemplateInterface::parseVariable() must be omitted in E:\fr\wb\Protected\Jphp\Template\TemplateInterface.php on line 13
-[02-Aug-2016 11:22:05 PRC] PHP Fatal error:  Call to protected method Jphp\DesignPattern\Singleton\Singleton::test() from context 'App\Controller\SiteController' in E:\fr\wb\Protected\Controller\SiteController.php on line 31
-[02-Aug-2016 11:22:25 PRC] PHP Fatal error:  Call to private method Jphp\DesignPattern\Singleton\Singleton::test() from context 'App\Controller\SiteController' in E:\fr\wb\Protected\Controller\SiteController.php on line 31
-[02-Aug-2016 11:35:55 PRC] PHP Fatal error:  Call to protected method Jphp\DesignPattern\SimpleFactory\Add::getValue() from context 'App\Controller\SiteController' in E:\fr\wb\Protected\Controller\SiteController.php on line 39
-[02-Aug-2016 11:36:41 PRC] PHP Fatal error:  Call to private method Jphp\DesignPattern\SimpleFactory\Operation::a() from context 'Jphp\DesignPattern\SimpleFactory\Add' in E:\fr\wb\Protected\Jphp\DesignPattern\SimpleFactory\Add.php on line 18

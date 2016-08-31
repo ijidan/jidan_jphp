@@ -7,7 +7,7 @@ namespace Jphp\Test;
  * @package Jphp\Test
  */
 interface UserFinderInterface {
-
-	public function findUser();
-
+    
+    public function findUser();
+    
 }

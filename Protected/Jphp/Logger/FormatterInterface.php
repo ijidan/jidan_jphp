@@ -8,11 +8,11 @@ namespace Jphp\Logger;
  * @package Jphp\Logger
  */
 interface FormatterInterface {
-	
-	/**
-	 * 格式化日志
-	 * @param array $data
-	 * @return mixed
-	 */
-	public function format(array $data);
+    
+    /**
+     * 格式化日志
+     * @param array $data
+     * @return mixed
+     */
+    public function format(array $data);
 }

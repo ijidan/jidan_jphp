@@ -3,5 +3,5 @@
 namespace Jphp\Http;
 
 class JsonResponse {
-
+    
 }

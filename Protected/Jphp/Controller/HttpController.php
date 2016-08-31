@@ -6,6 +6,6 @@ namespace Jphp\Controller;
  * Class HttpController
  * @package Jphp\Controller
  */
-class HttpController implements ControllerInterface{
-	
+class HttpController implements ControllerInterface {
+    
 }

@@ -7,5 +7,5 @@ namespace Jphp\Image;
  * @package Jphp\Image
  */
 class ImagickDriver {
-
+    
 }

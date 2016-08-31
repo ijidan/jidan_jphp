@@ -6,6 +6,6 @@ namespace Jphp\View;
  * Class view
  * @package Jphp\View
  */
-class view extends ViewBase{
-
+class view extends ViewBase {
+    
 } 

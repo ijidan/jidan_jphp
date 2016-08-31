@@ -7,5 +7,5 @@ namespace Jphp\Http;
  * @package Jphp\Http
  */
 class JsonResponse {
-
+    
 }

@@ -8,5 +8,5 @@ use Jphp\Controller\HttpController;
  * Class TestController
  * @package App\Controller
  */
-class TestController extends HttpController{
+class TestController extends HttpController {
 }

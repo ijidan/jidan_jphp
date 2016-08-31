@@ -1,17 +1,14 @@
 <?php
 namespace Jphp\Application;
 
+use Jphp\Http\Response;
+use Jphp\Service\Container;
+
 /**
- * Class ConsoleApplication
+ * Class DamonApplication
  * @package Jphp\Application
  */
-class ConsoleApplication implements ApplicationInterface {
-    /**
-     * 构造函数
-     */
-    public function __construct()
-    {
-    }
+class DamonApplication extends Container implements ApplicationInterface {
     
     /**
      * 获取应用名称
@@ -65,24 +62,6 @@ class ConsoleApplication implements ApplicationInterface {
     public function getRegisteredConfiguredProviders()
     {
         // TODO: Implement getRegisteredConfiguredProviders() method.
-    }
-    
-    /**
-     * 注册服务
-     * @return mixed
-     */
-    public function registerProvider()
-    {
-        // TODO: Implement registerProvider() method.
-    }
-    
-    /**
-     * 注册延迟加载的服务
-     * @return mixed
-     */
-    public function registerDeferredProvider()
-    {
-        // TODO: Implement registerDeferredProvider() method.
     }
     
     /**

@@ -8,6 +8,6 @@ namespace Jphp\Controller;
  * Class ConsoleController
  * @package Jphp\Controller
  */
-class ConsoleController implements ControllerInterface{
-
+class ConsoleController implements ControllerInterface {
+    
 }

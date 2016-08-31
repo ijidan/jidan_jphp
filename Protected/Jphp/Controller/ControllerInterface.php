@@ -6,6 +6,6 @@ namespace Jphp\Controller;
  * Interface ControllerInterface
  * @package Jphp\Controller
  */
-interface ControllerInterface{
-
+interface ControllerInterface {
+    
 }

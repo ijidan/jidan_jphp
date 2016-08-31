@@ -7,5 +7,5 @@ namespace Jphp\Action;
  * @package Jphp\Action
  */
 class InlineAction {
-
+    
 } 

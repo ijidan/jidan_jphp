@@ -7,10 +7,10 @@ namespace Jphp\Event;
  * @package Jphp\Event
  */
 interface EventInterface {
-	/**
-	 * @param EventInterface|null $event
-	 * @return mixed
-	 */
-	public function handle(EventInterface $event=null);
-
+    /**
+     * @param EventInterface|null $event
+     * @return mixed
+     */
+    public function handle(EventInterface $event = null);
+    
 }

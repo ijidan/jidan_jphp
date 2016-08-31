@@ -4,12 +4,11 @@ namespace Lib\Util;
 /*
  * 获取配置的工具类
  */
-class Config
-{
+class Config {
     private static $configList = [];
     private static $dataList = [];
     private static $i18nList = [];
-
+    
     public static function loadConfig($fileName)
     {
         $path = BASE_DIR . "/config/{$fileName}.php";
@@ -18,7 +17,7 @@ class Config
         }
         return self::$configList[$path];
     }
-
+    
     public static function loadData($fileName)
     {
         //$list = explode('.', $fileName);
@@ -33,7 +32,7 @@ class Config
         }
         return self::$dataList[$path];
     }
-
+    
     public static function loadI18n($lang, $fileName)
     {
         $path = BASE_DIR . "/i18n/{$lang}/{$fileName}.php";
@@ -42,7 +41,7 @@ class Config
         }
         return self::$i18nList[$path];
     }
-
+    
     /*
      * 加载php文件
      */
@@ -51,13 +50,13 @@ class Config
         if (!file_exists($path)) {
             throw new \ErrorException("Configuration file: [$path] cannot be found");
         }
-
+        
         $data = require $path;
-
+        
         if (!is_array($data)) {
             throw new \ErrorException('PHP file does not return an array');
         }
-
+        
         return $data;
     }
 }

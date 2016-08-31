@@ -7,18 +7,18 @@ namespace Jphp\Template;
  * @package Jphp\Template
  */
 interface TemplateInterface {
-	/**
-	 * @return mixed
-	 */
-	public function parseVariable();
-
-	/**
-	 * @return mixed
-	 */
-	public function parseComment();
-
-	/**
-	 * @return mixed
-	 */
-	public function parseTags();
+    /**
+     * @return mixed
+     */
+    public function parseVariable();
+    
+    /**
+     * @return mixed
+     */
+    public function parseComment();
+    
+    /**
+     * @return mixed
+     */
+    public function parseTags();
 }

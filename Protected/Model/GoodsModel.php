@@ -8,28 +8,31 @@ use Jphp\Database\ActiveRecord;
  * Class GoodsModel
  * @package App\Model
  */
-class GoodsModel extends ActiveRecord{
+class GoodsModel extends ActiveRecord {
     /**
      * 主键
      * @return string
      */
-    public function getTableName(){
+    public function getTableName()
+    {
         return "goods";
     }
-
+    
     /**
      * 表前缀
      * @return string
      */
-    public function getTablePrefix(){
+    public function getTablePrefix()
+    {
         return "iwebshop_";
     }
-
+    
     /**
      * 主键
      * @return string
      */
-    public function getPrimaryKey(){
+    public function getPrimaryKey()
+    {
         return "id";
     }
 }
