@@ -138,3 +138,57 @@ if (!function_exists("trace")) {
         }
     }
 }
+/**
+ * 读取php文件，返回php54格式的（短格式）的字符串
+ */
+if (!function_exists("convertArraysToSquareBrackets")) {
+    function convertArraysToSquareBrackets($file){
+        $code = file_get_contents($file);
+        $out = '';
+        $brackets = [];
+        $tokens = token_get_all($code);
+        for ($i = 0; $i < count($tokens); $i++) {
+            $token = $tokens[$i];
+            if ($token === '(') {
+                $brackets[] = false;
+            } elseif ($token === ')') {
+                $token = array_pop($brackets) ? ']' : ')';
+            } elseif (is_array($token) && $token[0] === T_ARRAY) {
+                $a = $i + 1;
+                if (isset($tokens[$a]) && $tokens[$a][0] === T_WHITESPACE) {
+                    $a++;
+                }
+                if (isset($tokens[$a]) && $tokens[$a] === '(') {
+                    $i = $a;
+                    $brackets[] = true;
+                    $token = '[';
+                }
+            }
+            $out .= is_array($token) ? $token[1] : $token;
+        }
+        return $out;
+    }
+}
+/**
+ *  数组格式化成php54的array
+ */
+if (!function_exists("var_export54")) {
+    function var_export54($var, $indent = ""){
+        switch (gettype($var)) {
+            case "string":
+                return '"' . addcslashes($var, "\\\$\"\r\n\t\v\f") . '"';
+            case "array":
+                $indexed = array_keys($var) === range(0, count($var) - 1);
+                $r = [];
+                foreach ($var as $key => $value) {
+                    $r[] = "$indent    " . ($indexed ? "" : self::var_export54($key) . " => ") . self::var_export54($value, "$indent    ");
+                }
+                return "[\n" . implode(",\n", $r) . "\n" . $indent . "]";
+            case "boolean":
+                return $var ? "TRUE" : "FALSE";
+            default:
+                return var_export($var, true);
+        }
+    }
+    
+}
