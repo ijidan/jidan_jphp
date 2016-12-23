@@ -26,7 +26,9 @@ class Kernel implements KernelInterface {
      */
     public function handle(Request $request)
     {
+        /** @var Router $router */
         $router = $this->app->router;
+        /** @var Response $response */
         $response = $router->dispatch($request);
         $response->send();
         // TODO: Implement handle() method.

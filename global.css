@@ -1,0 +1,45 @@
+
+blockquote, body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, hr, input, legend, li, ol, p, pre, td, textarea, th, ul { margin:0; padding:0 }
+
+body, button, input, select, textarea { font:12px/1.5 tahoma, arial, "\5b8b\4f53"; -ms-overflow-style:scrollbar }
+
+button, h1, h2, h3, h4, h5, h6, input, select, textarea { font-size:100% }
+
+address, cite, dfn, em, var { font-style:normal }
+
+code, kbd, pre, samp { font-family:courier new, courier, monospace }
+
+small { font-size:12px }
+
+ol, ul { list-style:none }
+
+a { text-decoration:none }
+
+sup { vertical-align:text-top }
+
+sub { vertical-align:text-bottom }
+
+legend { color:#000000 }
+
+fieldset, img { border:0 }
+
+table { border-collapse:collapse; border-spacing:0 }
+
+#content { width:950px }
+
+.sn-quick-menu .mc-count { color:#666666; padding:0 2px; font-weight:700; font-family:Arial }
+
+.tml-dialog-b2b { position:fixed; top:50%; left:50%; width:627px; height:370px; margin-left:-315px; margin-top:-190px; z-index:100003 }
+
+.ha
+.book .chn-link-book, .brand .chn-link-brand, .cosmetic .chn-link-cosmetic, .dianquanka .chn-link-dianquanka, .dq3c .chn-link-dq3c, .fuwuzhan .chn-link-fuwuzhan, .gonghuo .chn-link-gonghuo, .guize .chn-link-guize, .helpCenter .chn-link-helpCenter, .hui .chn-link-hui, .jia .chn-link-jia, .jiazhuang .chn-link-jiazhuang, .map .chn-link-map, .menhu .chn-link-menhu, .mybrand .chn-link-mybrand, .pinkong .chn-link-pinkong, .shangjia .chn-link-shangjia, .taolets .chn-link-taolets, .tmcod .chn-link-tmcod, .vip .chn-link-vip, .wuliu .chn-link-wuliu, .yiyao .chn-link-yiyao, .yushou .chn-link-yushou, .zhaoshang .chn-link-zhaoshang, .zhuanyun .chn-link-zhuanyun { display:none }
+
+.clearfix:after, .clearfix:before, .headerCon:after, .headerCon:before { display:table; content:""; overflow:hidden }
+
+.clearfix:after, .headerCon:after { clear:both }
+
+.clearfix, .headerCon { zoom:1 }
+
+#mallPage #header { margin-top:-30px; width:auto; margin-bottom:0; min-width:990px; background:#ffffff }
+
+#header { height:122px; margin-top:-26px !important; background:#ffffff; min-width:990px; width:auto !important; position:relative; z-index:1000 }

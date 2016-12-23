@@ -15,7 +15,9 @@ function jAutoload($class)
         'Jphp\Application\WebApplication' => JPHP_PATH . "Application" . DS . "WebApplication.php"
     );
     if (strpos($class, "Jphp") !== false) {
-        $path = str_replace("Jphp\\", JPHP_PATH, $class);
+        $path = str_replace("Jphp", rtrim(JPHP_PATH,"/"), $class);
+        $path=str_replace("\\",DS,$path);
+        $path=str_replace("/",DS,$path);
         $file = $path . ".php";
         if (is_file($file)) {
             require_once $file;
