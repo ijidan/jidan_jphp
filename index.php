@@ -1,6 +1,8 @@
 <?php
 
+
 namespace App;
+
 
 
 defined("DS") or define("DS", DIRECTORY_SEPARATOR);

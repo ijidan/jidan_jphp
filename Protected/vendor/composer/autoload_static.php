@@ -9,6 +9,7 @@ class ComposerStaticInit9c352f43600bef15c091203525f4cdd4
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+        'd37ca278186ad81280da73d7c939cad7' => __DIR__ . '/..' . '/kyoz/zookeeper-client/ZookeeperClient.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -28,6 +29,9 @@ class ComposerStaticInit9c352f43600bef15c091203525f4cdd4
             'Symfony\\Component\\Debug\\' => 24,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\Config\\' => 25,
+            'Stash\\' => 6,
+            'Sonata\\Cache\\' => 13,
+            'Slim\\PDO\\' => 9,
             'Silex\\' => 6,
             'Seld\\CliPrompt\\' => 15,
         ),
@@ -38,6 +42,8 @@ class ComposerStaticInit9c352f43600bef15c091203525f4cdd4
         ),
         'P' => 
         array (
+            'Psr\\SimpleCache\\' => 16,
+            'Psr\\Cache\\' => 10,
             'Predis\\' => 7,
             'Phinx\\' => 6,
         ),
@@ -48,6 +54,21 @@ class ComposerStaticInit9c352f43600bef15c091203525f4cdd4
         'L' => 
         array (
             'League\\CLImate\\' => 15,
+        ),
+        'G' => 
+        array (
+            'Grpc\\' => 5,
+        ),
+        'F' => 
+        array (
+            'Faker\\' => 6,
+        ),
+        'C' => 
+        array (
+            'Cache\\TagInterop\\' => 17,
+            'Cache\\Hierarchy\\' => 16,
+            'Cache\\Adapter\\Memcached\\' => 24,
+            'Cache\\Adapter\\Common\\' => 21,
         ),
     );
 
@@ -108,6 +129,18 @@ class ComposerStaticInit9c352f43600bef15c091203525f4cdd4
         array (
             0 => __DIR__ . '/..' . '/symfony/config',
         ),
+        'Stash\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tedivm/stash/src/Stash',
+        ),
+        'Sonata\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/cache/src',
+        ),
+        'Slim\\PDO\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/slim/pdo/src/PDO',
+        ),
         'Silex\\' => 
         array (
             0 => __DIR__ . '/..' . '/silex/silex/src/Silex',
@@ -124,6 +157,14 @@ class ComposerStaticInit9c352f43600bef15c091203525f4cdd4
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
         ),
+        'Psr\\SimpleCache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+        ),
+        'Psr\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
         'Predis\\' => 
         array (
             0 => __DIR__ . '/..' . '/predis/predis/src',
@@ -139,6 +180,30 @@ class ComposerStaticInit9c352f43600bef15c091203525f4cdd4
         'League\\CLImate\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/climate/src',
+        ),
+        'Grpc\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/grpc/grpc/src/lib',
+        ),
+        'Faker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
+        ),
+        'Cache\\TagInterop\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cache/tag-interop',
+        ),
+        'Cache\\Hierarchy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cache/hierarchical-cache',
+        ),
+        'Cache\\Adapter\\Memcached\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cache/memcached-adapter',
+        ),
+        'Cache\\Adapter\\Common\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cache/adapter-common',
         ),
     );
 

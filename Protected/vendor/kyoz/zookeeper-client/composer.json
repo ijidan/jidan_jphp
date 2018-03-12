@@ -1,0 +1,16 @@
+{
+    "name": "kyoz/zookeeper-client",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "周斌",
+            "email": "kyozhou@sina.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "autoload": {
+        "files": ["ZookeeperClient.php"]
+    }
+}

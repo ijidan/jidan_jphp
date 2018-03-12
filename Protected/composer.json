@@ -10,9 +10,22 @@
         "vlucas/valitron":"*",
         "robmorgan/phinx":"@dev",
         "league/climate":"*",
-        "pyrocms/lex": "2.2.*"
-    },
+        "pyrocms/lex": "2.2.*",
+        "kyoz/zookeeper-client": "^1.0",
+	  	"grpc/grpc": "v1.6.0",
+        "tedivm/stash": "^0.14.2",
+        "sonata-project/cache": "^2.0",
+        "cache/memcached-adapter": "^1.0",
+        "fzaninotto/faker": "^1.7",
+        "slim/pdo": "^1.10"
+	},
     "require-dev": {
         "codegyre/robo": "*"
-    }
+    },
+	"repositories": {
+	  "packagist": {
+		"type": "composer",
+		"url": "https://packagist.phpcomposer.com"
+	  }
+	}
 }

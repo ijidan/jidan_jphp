@@ -298,7 +298,7 @@ abstract class ActiveRecord implements ActiveRecordInterface, Serializable, Arra
      */
     public static function getDbConnection()
     {
-        $connection = new Connection("localhost", "shop", "root", "root");
+        $connection = new Connection("192.168.33.10", "test", "root", "root");
         return $connection->getConnect();
     }
     

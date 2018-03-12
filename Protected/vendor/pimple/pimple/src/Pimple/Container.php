@@ -95,6 +95,7 @@ class Container implements \ArrayAccess
         if (!isset($this->keys[$id])) {
             throw new \InvalidArgumentException(sprintf('Identifier "%s" is not defined.', $id));
         }
+
         if (
             isset($this->raw[$id])
             || !is_object($this->values[$id])
@@ -103,6 +104,7 @@ class Container implements \ArrayAccess
         ) {
             return $this->values[$id];
         }
+
         if (isset($this->factories[$this->values[$id]])) {
             return $this->values[$id]($this);
         }

@@ -327,6 +327,7 @@ class Logger implements LoggerInterface
             'datetime' => $ts,
             'extra' => array(),
         );
+
         foreach ($this->processors as $processor) {
             $record = call_user_func($processor, $record);
         }
