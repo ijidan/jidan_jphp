@@ -3,7 +3,7 @@
 
 namespace App;
 
-
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 
 defined("DS") or define("DS", DIRECTORY_SEPARATOR);
 

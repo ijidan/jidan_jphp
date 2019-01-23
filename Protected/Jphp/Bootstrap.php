@@ -44,7 +44,6 @@ function jErrorHandler($err_no, $err_message, $err_file, $err_line, array $err_c
         Error    File:{$err_file}</br>
         Error    Line:{$err_line}</br>
 EOF;
-    pr($content, 1);
     return false;
 }
 
