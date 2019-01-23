@@ -6,8 +6,7 @@ use App\Model\Category;
 use Jphp\Controller\HttpController;
 use Jphp\Http\Request;
 use Jphp\Http\Response;
-use League\Flysystem\Adapter\Local;
-use League\Flysystem\Filesystem;
+use League\Csv\Writer;
 use Lib\Util\Get68Util;
 use QL\QueryList;
 
@@ -17,31 +16,24 @@ use QL\QueryList;
  * @package App\Controller
  */
 class SiteController extends HttpController {
-
 	/**
-	 * @methods=["GET","POST"];
+	 * 首页
 	 * @param Request $request
 	 * @return Response
-	 * @throws \League\Flysystem\FileExistsException
+	 * @throws \League\Csv\CannotInsertRecord
 	 */
 	public function indexAction(Request $request) {
 		set_time_limit(0);
 		$get68 = new Get68Util();
-		$output=null;
-		$companyList = $get68->getIndustryCompanyList(Get68Util::TYPE_GIFT_CODE,$output);
-		$firstCompany=$companyList[0];
-		$header=array_keys($firstCompany);
-
-		$fp = fopen('test.csv','a');
-		$header = implode(',', $header) . PHP_EOL;
-		$content = '';
-		foreach ($companyList as $company) {
-			$companyIndexArray=array_values($company);
-			$content .= implode(',', $companyIndexArray) . PHP_EOL;
-		}
-		$csv = chr(0xEF).chr(0xBB).chr(0xBF).$header.$content;
-		fwrite($fp, $csv);
-		fclose($fp);
+		$output = null;
+		$companyList = $get68->getIndustryCompanyList(Get68Util::TYPE_GIFT_CODE, $output);
+		$firstCompany = $companyList[0];
+		$header = array_keys($firstCompany);
+		$csv = Writer::createFromString('');
+		$csv->insertOne($header);
+		$csv->insertAll($companyList);
+		$content = $csv->getContent(); //returns the CSV document as a string
+		pr($content, 1);
 		return new Response("成功");
 	}
 

@@ -15,7 +15,8 @@ $app = new Silly\Application();
 
 $app->command('run [type]', function ($type, OutputInterface $output)  {
 	$get68 = new Get68Util();
-	$companyList = $get68->getIndustryCompanyList(Get68Util::TYPE_GIFT_CODE,$output);
+	$get68->getIndustryCompanyList(Get68Util::TYPE_GIFT_CODE,$output);
+	$get68->getIndustryCompanyList(Get68Util::TYPE_ELECTRONIC_CODE,$output);
 	$output->writeln("执行完毕");
 });
 

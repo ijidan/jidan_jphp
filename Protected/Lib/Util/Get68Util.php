@@ -38,7 +38,11 @@ class Get68Util {
 			"_list" => "gift_company_list.json",
 			"_log"  => "gift_company_log.log"
 		],
-		self::TYPE_ELECTRONIC_CODE => self::TYPE_ELECTRONIC_NAME,
+		self::TYPE_ELECTRONIC_CODE => [
+			"_id"   => "elec_company_id.log",
+			"_list" => "elec_company_list.json",
+			"_log"  => "elec_company_log.log"
+		],
 	];
 
 	/**
@@ -47,11 +51,11 @@ class Get68Util {
 	 * @return array
 	 */
 	public static function getCompanyIdListFromFile($code) {
-		$file = self::$TYPE_CODE_FILE_MAP[$code]["_id"];
-		$file = fopen($file, "r");
+		$filePath = self::$TYPE_CODE_FILE_MAP[$code]["_id"];
+		$file = fopen($filePath, "r");
 		$allCompanyIdList = [];
 		while (!feof($file)) {
-			$content = fgets($file);
+			$content = trim(fgets($file));
 			if ($content) {
 				$contentArr = \json_decode($content, true);
 				$companyIdList = $contentArr["companyIdList"];
@@ -71,7 +75,7 @@ class Get68Util {
 	public static function getCompanyInfoListFromFile($code) {
 		$file = self::$TYPE_CODE_FILE_MAP[$code]["_list"];
 		$contents = file_get_contents($file);
-		$data = \json_decode($contents,true);
+		$data = \json_decode($contents, true);
 		return $data;
 	}
 
@@ -88,6 +92,7 @@ class Get68Util {
 			return $companyInfoList;
 		}
 		$companyIdList = self::getCompanyIdListFromFile($code);
+
 		if (count($companyIdList) == 0) {
 			$companyIdList = self::getCompanyIdList($code, $output);
 		}
@@ -138,10 +143,10 @@ class Get68Util {
 				"page"          => $i,
 				"companyIdList" => $currentPageCompanyIdList
 			];
-			file_put_contents("gift_company_id.log", \json_encode($data) . "\r\n", FILE_APPEND);
+			file_put_contents(self::$TYPE_CODE_FILE_MAP[$code]["_id"], \json_encode($data) . "\r\n", FILE_APPEND);
 			$message = "第${i}页处理完毕，公司ID分别是:" . \json_encode($currentPageCompanyIdList);
-			file_put_contents("gift_company_log.log", $message . " \r\n", FILE_APPEND);
-			if($output){
+			file_put_contents(self::$TYPE_CODE_FILE_MAP[$code]["_log"], $message . " \r\n", FILE_APPEND);
+			if ($output) {
 				$output->writeln($message);
 			}
 
@@ -226,7 +231,7 @@ class Get68Util {
 			];
 		}
 		$idx += 1;
-		if($output){
+		if ($output) {
 			$output->writeln("第${idx}个公司【${companyId}】数据获取完毕.");
 		}
 		return $companyInfo;
