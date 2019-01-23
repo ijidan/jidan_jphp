@@ -6,6 +6,9 @@ use App\Model\Category;
 use Jphp\Controller\HttpController;
 use Jphp\Http\Request;
 use Jphp\Http\Response;
+use League\Flysystem\Adapter\Local;
+use League\Flysystem\Filesystem;
+use Lib\Util\Get68Util;
 use QL\QueryList;
 
 
@@ -19,37 +22,29 @@ class SiteController extends HttpController {
 	 * @methods=["GET","POST"];
 	 * @param Request $request
 	 * @return Response
+	 * @throws \League\Flysystem\FileExistsException
 	 */
 	public function indexAction(Request $request) {
 		set_time_limit(0);
+		$get68 = new Get68Util();
+		$output=null;
+		$companyList = $get68->getIndustryCompanyList(Get68Util::TYPE_GIFT_CODE,$output);
+		$firstCompany=$companyList[0];
+		$header=array_keys($firstCompany);
 
-		$giftType="工艺礼品";
-		$electronicType="消费电子";
-
-		$giftCompanyList=$this->getIndustryCompanyList($giftType);
-		pr($giftCompanyList,1);
-		$electronicCompanyList=$this->getIndustryCompanyList($electronicType);
-
-
+		$fp = fopen('test.csv','a');
+		$header = implode(',', $header) . PHP_EOL;
+		$content = '';
+		foreach ($companyList as $company) {
+			$companyIndexArray=array_values($company);
+			$content .= implode(',', $companyIndexArray) . PHP_EOL;
+		}
+		$csv = chr(0xEF).chr(0xBB).chr(0xBF).$header.$content;
+		fwrite($fp, $csv);
+		fclose($fp);
 		return new Response("成功");
 	}
 
-	/**
-	 * 获取公司列表
-	 * @param $industry
-	 * @return array
-	 */
-	private function getIndustryCompanyList($industry){
-		$companyIdList = $this->getCompanyIdList($industry);
-		$companyInfoList = [];
-		foreach ($companyIdList as $companyId) {
-			$companyInfo = $this->getCompanyInfo($companyId);
-			if ($companyInfo["companyMail"]) {
-				array_push($companyInfoList, $companyInfo);
-			}
-		}
-		return $companyInfoList;
-	}
 
 	/**
 	 * 获取公司信息
@@ -107,11 +102,11 @@ class SiteController extends HttpController {
 	}
 
 	/**
-	 * 获取公司ID
+	 * 获取总页数
 	 * @param $type
-	 * @return array
+	 * @return mixed
 	 */
-	private function getCompanyIdList($type) {
+	private function getCompanyTotalPage($type) {
 		$pattern = "/_(\d+).shtml/";
 		$url = "http://www.get56.com/get56n/info/custom_${type}_1.shtml";
 		$lastPageHtml = "a[title=尾页]";
@@ -122,23 +117,101 @@ class SiteController extends HttpController {
 		if ($matchResult === false) {
 			dump("尾页解析错误", 1);
 		}
-		$lastPage = 5;
+		$lastPage = $matches[1];
+		return $lastPage;
+	}
+
+	/**
+	 * 获取公司ID
+	 * @param $type
+	 * @return array
+	 */
+	private function getCompanyIdList($type) {
+		$lastPage = $this->getCompanyTotalPage($type);
 		$allCompanyIdList = [];
 		for ($i = 1; $i <= $lastPage; $i++) {
-			$url = "http://www.get56.com/get56n/info/custom_工艺礼品_${i}.shtml";
+			$url = "http://www.get56.com/get56n/info/custom_${type}_${i}.shtml";
 			$queryObj = QueryList::get($url);
 			$detailHtml = "div[class=seller_unit_more] a";
 			$detailUrlCollection = $queryObj->find($detailHtml)->attrs("href");
 			$detailUrlList = $detailUrlCollection->toArray();
+
+			$currentPageCompanyIdList = [];
 			if ($detailUrlList) {
+				$pattern = "/_(\d+).shtml/";
 				foreach ($detailUrlList as $detailUrl) {
 					$detailMatchResult = preg_match($pattern, $detailUrl, $matches);
 					if ($detailMatchResult !== false) {
 						$currentId = $matches[1];
+						array_push($currentPageCompanyIdList, $currentId);
 						array_push($allCompanyIdList, $currentId);
 					}
 				}
 			}
+			$data = [
+				"page"          => $i,
+				"companyIdList" => $currentPageCompanyIdList
+			];
+			file_put_contents("gift_company_id.log", \json_encode($data) . "\r\n", FILE_APPEND);
+
+			file_put_contents("gift_company_log.log", "第${i}页处理完毕，公司ID分别是:" . \json_encode($currentPageCompanyIdList) . " \r\n", FILE_APPEND);
+			$rand = rand(1, 1000);
+			usleep($rand);
+		}
+		return $allCompanyIdList;
+	}
+
+	/**
+	 * 获取一页的数据
+	 * @param $type
+	 * @param $pageIndex
+	 */
+	private function getOnePageCompanyIdList($type, $pageIndex) {
+		$totalPage = $this->getCompanyTotalPage($type);
+		$pageSize = 100;
+		$pageStart = ($totalPage - $pageSize * $pageIndex);
+		$pageEnd = $pageStart + $pageSize;
+		if ($pageEnd >= $totalPage) {
+			$pageEnd = $totalPage;
+		}
+		$this->getRangeCompanyIdList($type, $pageStart, $pageEnd);
+
+	}
+
+	/**
+	 * 获取公司ID
+	 * @param $type
+	 * @param $pageStart
+	 * @param $pageEnd
+	 * @return array
+	 */
+	private function getRangeCompanyIdList($type, $pageStart, $pageEnd) {
+		$allCompanyIdList = [];
+		for ($i = $pageStart; $i <= $pageEnd; $i++) {
+			$url = "http://www.get56.com/get56n/info/custom_${type}_${i}.shtml";
+			$queryObj = QueryList::get($url);
+			$detailHtml = "div[class=seller_unit_more] a";
+			$detailUrlCollection = $queryObj->find($detailHtml)->attrs("href");
+			$detailUrlList = $detailUrlCollection->toArray();
+
+			$currentPageCompanyIdList = [];
+			if ($detailUrlList) {
+				$pattern = "/_(\d+).shtml/";
+				foreach ($detailUrlList as $detailUrl) {
+					$detailMatchResult = preg_match($pattern, $detailUrl, $matches);
+					if ($detailMatchResult !== false) {
+						$currentId = $matches[1];
+						array_push($currentPageCompanyIdList, $currentId);
+						array_push($allCompanyIdList, $currentId);
+					}
+				}
+			}
+			$data = [
+				"page"          => $i,
+				"companyIdList" => $currentPageCompanyIdList
+			];
+			file_put_contents("gift_company_id.log", \json_encode($data) . "\r\n", FILE_APPEND);
+			file_put_contents("gift_company_log.log", "第${i}页处理完毕，公司ID分别是:" . \json_encode($currentPageCompanyIdList) . " \r\n", FILE_APPEND);
 			$rand = rand(1, 1000);
 			usleep($rand);
 		}

@@ -4,7 +4,7 @@ include "Function.php";
 
 defined("DS") or define("DS", DIRECTORY_SEPARATOR);
 defined("JPHP_PATH") or define("JPHP_PATH", __DIR__ . DS);
-
+defined("BASE_PATH") or define("BASE_PATH", dirname(dirname(JPHP_PATH)) . DS);
 /**
  * 自动加载
  * @param $class
@@ -49,11 +49,11 @@ EOF;
 
 /**
  * 异常
- * @param $exception
+ * @param Exception $exception
  */
 function jExceptionHandler($exception)
 {
-    dump($exception, 1);
+    dump($exception->getMessage(), 1);
 }
 
 /**

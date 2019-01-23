@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'mnshankar\\CSV' => array($vendorDir . '/mnshankar/csv/src'),
     'Upload' => array($vendorDir . '/codeguy/upload/src'),
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Slim' => array($vendorDir . '/slim/middleware/src'),
