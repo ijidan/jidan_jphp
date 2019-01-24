@@ -76,6 +76,7 @@ class ComposerStaticInit9c352f43600bef15c091203525f4cdd4
             'Slim\\Csrf\\' => 10,
             'Slim\\' => 5,
             'Silly\\' => 6,
+            'Seld\\CliPrompt\\' => 15,
         ),
         'R' => 
         array (
@@ -108,6 +109,7 @@ class ComposerStaticInit9c352f43600bef15c091203525f4cdd4
             'Lib\\' => 4,
             'League\\Flysystem\\' => 17,
             'League\\Csv\\' => 11,
+            'League\\CLImate\\' => 15,
             'LayerShifter\\TLDSupport\\' => 24,
             'LayerShifter\\TLDExtract\\' => 24,
             'LayerShifter\\TLDDatabase\\' => 25,
@@ -262,6 +264,10 @@ class ComposerStaticInit9c352f43600bef15c091203525f4cdd4
         array (
             0 => __DIR__ . '/..' . '/mnapoli/silly/src',
         ),
+        'Seld\\CliPrompt\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/seld/cli-prompt/src',
+        ),
         'Respect\\Validation\\' => 
         array (
             0 => __DIR__ . '/..' . '/respect/validation/library',
@@ -317,6 +323,10 @@ class ComposerStaticInit9c352f43600bef15c091203525f4cdd4
         'League\\Csv\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/csv/src',
+        ),
+        'League\\CLImate\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/climate/src',
         ),
         'LayerShifter\\TLDSupport\\' => 
         array (
