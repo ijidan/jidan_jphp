@@ -69,6 +69,7 @@ class ComposerStaticInit9c352f43600bef15c091203525f4cdd4
             'Symfony\\Component\\Yaml\\' => 23,
             'Symfony\\Component\\VarDumper\\' => 28,
             'Symfony\\Component\\HttpFoundation\\' => 33,
+            'Symfony\\Component\\Filesystem\\' => 29,
             'Symfony\\Component\\Console\\' => 26,
             'Stringy\\' => 8,
             'Slim\\Views\\' => 11,
@@ -234,6 +235,10 @@ class ComposerStaticInit9c352f43600bef15c091203525f4cdd4
         'Symfony\\Component\\HttpFoundation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/http-foundation',
+        ),
+        'Symfony\\Component\\Filesystem\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/filesystem',
         ),
         'Symfony\\Component\\Console\\' => 
         array (

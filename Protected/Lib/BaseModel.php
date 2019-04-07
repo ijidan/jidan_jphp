@@ -191,6 +191,7 @@ abstract class BaseModel {
 	/**
 	 * 单例
 	 * @return BaseDatabase|null
+	 * @throws \ErrorException
 	 */
 	private static function getPdoInstance() {
 		if (is_null(self::$instance)) {

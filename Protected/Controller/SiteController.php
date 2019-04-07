@@ -7,6 +7,7 @@ use Jphp\Controller\HttpController;
 use Jphp\Http\Request;
 use Jphp\Http\Response;
 use League\Csv\Writer;
+use Lib\Util\Get56Util;
 use Lib\Util\Get68Util;
 use QL\QueryList;
 
@@ -24,16 +25,8 @@ class SiteController extends HttpController {
 	 */
 	public function indexAction(Request $request) {
 		set_time_limit(0);
-		$get68 = new Get68Util();
-		$output = null;
-		$companyList = $get68->getIndustryCompanyList(Get68Util::TYPE_GIFT_CODE, $output);
-		$firstCompany = $companyList[0];
-		$header = array_keys($firstCompany);
-		$csv = Writer::createFromString('');
-		$csv->insertOne($header);
-		$csv->insertAll($companyList);
-		$content = $csv->getContent(); //returns the CSV document as a string
-		pr($content, 1);
+		Get56Util::doOneType(Get56Util::TYPE_TOY_CODE);
+		pr("done",1);
 		return new Response("成功");
 	}
 

@@ -1,6 +1,6 @@
 <?php
 
-use Lib\Util\Get68Util;
+use Lib\Util\Get56Util;
 use Symfony\Component\Console\Output\OutputInterface;
 
 set_time_limit(0);
@@ -15,9 +15,16 @@ require_once __DIR__ . DS . "Protected" . DS . "vendor" . DS . "autoload.php";
 $app = new Silly\Application();
 
 $app->command('run [type]', function ($type, OutputInterface $output) {
-	$get68 = new Get68Util();
-	$get68->getIndustryCompanyList(Get68Util::TYPE_GIFT_CODE, $output);
-	$get68->getIndustryCompanyList(Get68Util::TYPE_ELECTRONIC_CODE, $output);
+	$get68 = new Get56Util();
+	$codeList=Get56Util::getTypeCodeList();
+	$codeList=[Get56Util::TYPE_OFFICE_CULTURE_CODE];
+	foreach($codeList as $code){
+		$companyInfoList=$get68->getIndustryCompanyList($code, $output);
+		$get68->genCSVDoc($code,$companyInfoList);
+		$output->writeln(Get56Util::$TYPE_CODE_NAME_MAP[$code]."执行完毕");
+		$sec=mt_rand(5,30);
+		sleep($sec);
+	}
 	$output->writeln("执行完毕");
 });
 
