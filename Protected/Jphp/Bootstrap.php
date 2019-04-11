@@ -5,6 +5,8 @@ include "Function.php";
 defined("DS") or define("DS", DIRECTORY_SEPARATOR);
 defined("JPHP_PATH") or define("JPHP_PATH", __DIR__ . DS);
 defined("BASE_PATH") or define("BASE_PATH", dirname(dirname(JPHP_PATH)) . DS);
+defined("BASE_DIR") or define("BASE_DIR",dirname(__DIR__).DS);
+
 /**
  * 自动加载
  * @param $class

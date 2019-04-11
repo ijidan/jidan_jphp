@@ -12,12 +12,13 @@ require_once __DIR__ . DS . "Protected" . DS . "Jphp" . DS . "Bootstrap.php";
 require_once __DIR__ . DS . "Protected" . DS . "Jphp" . DS . "Function.php";
 require_once __DIR__ . DS . "Protected" . DS . "vendor" . DS . "autoload.php";
 
+
 $app = new Silly\Application();
 
 $app->command('run [type]', function ($type, OutputInterface $output) {
 	$get68 = new Get56Util();
 	$codeList=Get56Util::getTypeCodeList();
-	$codeList=[Get56Util::TYPE_OFFICE_CULTURE_CODE];
+	$codeList=[Get56Util::TYPE_HANDCRAFTED_GIFT_CODE];
 	foreach($codeList as $code){
 		$companyInfoList=$get68->getIndustryCompanyList($code, $output);
 		$get68->genCSVDoc($code,$companyInfoList);

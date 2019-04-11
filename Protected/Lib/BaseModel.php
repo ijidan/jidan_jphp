@@ -1,4 +1,5 @@
 <?php
+
 namespace Lib;
 
 use Lib\DataBase\BaseDatabase;
@@ -26,6 +27,7 @@ abstract class BaseModel {
 	/**
 	 * 构造函数
 	 * BaseModel constructor.
+	 * @throws \ErrorException
 	 */
 	public function __construct() {
 		$this->pdo = self::getPdoInstance();
@@ -56,7 +58,7 @@ abstract class BaseModel {
 
 	/**
 	 * 查找
-	 * @param string $where
+	 * @param string $whereConfiguration file
 	 * @param array $values
 	 * @param string $order
 	 * @param string $orderType
@@ -134,12 +136,22 @@ abstract class BaseModel {
 
 	/**
 	 * 更新
-	 * @param array $kvMap
+	 * @param array $kvMap_
 	 * @param string $where
-	 * @param array $values
+	 * @param array $values_
 	 * @return int
 	 */
-	public static function update(array $kvMap, $where = "", array $values = []) {
+	public static function update(array $kvMap_, $where = "", array $values_ = []) {
+		$argsNum=func_num_args();
+		if($argsNum==2){
+			$_kvMap=$_values=[];
+			self::genKvMapAndValues($kvMap_,$_kvMap,$_values);
+			$kvMap=$_kvMap;
+			$values=$_values;
+		}else{
+			$kvMap=$kvMap_;
+			$values=$values_;
+		}
 		$model = self::getModel();
 		$fullTableName = $model->getFullTableName();
 		/** @var BaseUpdateStatement $updateStatement */
@@ -195,7 +207,7 @@ abstract class BaseModel {
 	 */
 	private static function getPdoInstance() {
 		if (is_null(self::$instance)) {
-			$dbConfig = Config::loadConfig('database')["mysql"]["db1"];
+			$dbConfig = Config::loadConfig('database')["mysql"]["read"];
 			$host = $dbConfig["host"];
 			$user = $dbConfig["user"];
 			$password = $dbConfig["password"];
@@ -219,8 +231,25 @@ abstract class BaseModel {
 		array_walk($data, function ($item) use (&$questionMark) {
 			$questionMark .= "?,";
 		});
-		$questionMark=rtrim($questionMark,",");
+		$questionMark = rtrim($questionMark, ",");
 		return $questionMark;
+	}
+
+	/**
+	 * 产生相关的数据
+	 * @param $insData
+	 * @param array $kvMap
+	 * @param array $values
+	 */
+	public static function genKvMapAndValues($insData, array &$kvMap, array &$values) {
+		$kvMap_=[];
+		$values_=[];
+		array_walk($insData, function ($value, $key) use (&$kvMap_, &$values_) {
+			$kvMap_[$key] = "?";
+			array_push($values_, $value);
+		});
+		$kvMap=$kvMap_;
+		$values=$values_;
 	}
 
 	/**

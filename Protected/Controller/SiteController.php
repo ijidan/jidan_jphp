@@ -6,9 +6,10 @@ use App\Model\Category;
 use Jphp\Controller\HttpController;
 use Jphp\Http\Request;
 use Jphp\Http\Response;
-use League\Csv\Writer;
 use Lib\Util\Get56Util;
-use Lib\Util\Get68Util;
+use PhpOffice\PhpSpreadsheet\Reader as Reader;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use QL\QueryList;
 
 
@@ -25,11 +26,66 @@ class SiteController extends HttpController {
 	 */
 	public function indexAction(Request $request) {
 		set_time_limit(0);
-		Get56Util::doOneType(Get56Util::TYPE_TOY_CODE);
-		pr("done",1);
+		Get56Util::doOneType(Get56Util::TYPE_HANDCRAFTED_GIFT_CODE);
+		pr("done", 1);
 		return new Response("成功");
 	}
 
+	public function writeExcelAction() {
+		$path = "/vagrant/usb_stick";
+
+
+//		$reader = new Reader\Xlsx();
+//		$spreadsheet = $reader->load(BASE_PATH . "/usb_stick_quotation_v2.xlsx");
+//		$activeSheet = $spreadsheet->getActiveSheet();
+
+//		$res = array();
+//		foreach ($activeSheet->getRowIterator(1) as $row) {
+//			$tmp = array();
+//			foreach ($row->getCellIterator() as $cell) {
+//				$tmp[] = $cell->getFormattedValue();
+//			}
+//			$res[$row->getRowIndex()] = $tmp;
+//		}
+//
+//		pr($res, 1);
+
+
+		error_reporting(E_ALL);
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+
+		$dirIt = new \DirectoryIterator($path);
+		foreach ($dirIt as $idx=>$fileInfo) {
+			if (!$fileInfo->isDot()) {
+				$pathName = $fileInfo->getPathname();
+				$fileName = $fileInfo->getFilename();
+//				pr($pathName,$fileName,1);
+
+				$drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+				$drawing->setName($fileName);
+				$drawing->setDescription($fileName);
+				$drawing->setPath($pathName);
+				$drawing->setWidth(200);
+				$drawing->setHeight(200);
+				$drawing->setOffsetX(10);
+				$drawing->setOffsetY(10);
+				$drawing->setCoordinates("A".($idx+1));
+				$drawing->setWorksheet($sheet);
+
+//				$sheet->setCellValue('A1', "AAA");
+			}
+		}
+
+		$writer = new Xlsx($spreadsheet);
+		$writer->save('hello world.xlsx');
+
+		dump("1", 1);
+	}
+
+	public function changeUFDName() {
+
+	}
 
 	/**
 	 * 获取公司信息

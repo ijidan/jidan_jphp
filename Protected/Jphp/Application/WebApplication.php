@@ -2,7 +2,6 @@
 namespace Jphp\Application;
 
 use Jphp\Config\Config;
-use Jphp\Database\Connection;
 use Jphp\Http\Kernel;
 use Jphp\Http\Request;
 use Jphp\Http\Response;
@@ -10,9 +9,6 @@ use Jphp\Http\Router;
 use Jphp\Middleware\Auth;
 use Jphp\Middleware\CSRF;
 use Jphp\Service\Container;
-use Jphp\Test\UserFinder;
-use Jphp\Test\UserFinderInterface;
-use Jphp\Test\UserList;
 
 /**
  * Class WebApplication
