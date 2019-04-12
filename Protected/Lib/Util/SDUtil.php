@@ -64,10 +64,14 @@ class SDUtil {
 			$checkRe = SdProduct::find($where);
 			if ($checkRe) {
 				SdProduct::update($data, $where);
-				$output->writeln("更新：$docName");
+				if($output){
+					$output->writeln("更新：$docName");
+				}
 			} else {
 				SdProduct::insert($data);
-				$output->writeln("新增：$docName");
+				if($output){
+					$output->writeln("新增：$docName");
+				}
 			}
 		}
 	}
